@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #  Third Party
     'rest_framework',
     'django_filters',
+    'pipeline',
     # own
     'key',
 ]
@@ -123,3 +124,38 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineManifestStorage'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+)
+
+STATIC_ROOT = '/static/'
+
+PIPELINE = {
+    'STYLESHEETS': {
+        'colors': {
+            'stats': {
+                'source_filenames': (
+                  'css/cover.css',
+                  'css/product.css',
+                ),
+                'output_filename': 'css/stats.css',
+                'extra_context': {
+                    'media': 'screen,projection',
+                }
+            }
+        },
+    'HTML': {
+        'stats': {
+            'source_filenames':(
+                'templates/base.html',
+                'templates/home.html',
+            )
+        }
+    }
+    }
+}
