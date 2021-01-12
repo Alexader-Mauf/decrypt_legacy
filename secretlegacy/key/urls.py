@@ -8,6 +8,7 @@ urlpatterns = [
     path('home', views.index, name='index'),
     path('create-secretnote', views.create_secretnote, name='create_secretnote'),
     path('encode-decode', views.encode_decode, name='encode_decode'),
-    path('secretnote/<uuid>/', views.load_secretnote, name='load_secretnote'),
+    path('home/<uuid>/', views.load_secretnote, name='load_secretnote'),
     path('decode', views.decode, name='decode'),
+    #path('home?message=<uuid>', views.load_secretnote, name='load_secretnote'),
 ]
